@@ -1,15 +1,20 @@
 #!/bin/bash
 
-# One-Click Setup Script
-# Makes the script executable and handles all setup automatically
+# One-Click Setup Script for SecTracker Project
+# Clones the project from GitHub and handles all setup automatically
 
 set -e  # Exit on any error
+
+# Project configuration
+REPO_URL="https://github.com/SecFathy/sectracker.git"
+PROJECT_NAME="sectracker"
 
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
 NC='\033[0m' # No Color
 
 # Logging functions
@@ -29,6 +34,10 @@ log_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
+log_header() {
+    echo -e "${PURPLE}[SETUP]${NC} $1"
+}
+
 # Function to check if command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
@@ -46,12 +55,63 @@ validate_url() {
 # Make script executable
 chmod +x "$0"
 
-log_info "Starting one-click setup..."
-echo "========================================"
+log_header "SecTracker One-Click Setup"
+echo "=========================================="
+log_info "This script will:"
+echo "  1. Clone the SecTracker project from GitHub"
+echo "  2. Install all required dependencies"
+echo "  3. Configure Supabase integration"
+echo "  4. Set up the database"
+echo "  5. Prepare the project for development"
+echo ""
+
+# Check if git is installed
+if ! command_exists git; then
+    log_error "Git is not installed. Please install Git first:"
+    echo "  - macOS: Install Xcode Command Line Tools or use 'brew install git'"
+    echo "  - Linux: sudo apt install git (Ubuntu/Debian) or equivalent for your distro"
+    exit 1
+fi
+
+# Clone the repository
+log_info "Cloning SecTracker project..."
+if [[ -d "$PROJECT_NAME" ]]; then
+    log_warning "Directory '$PROJECT_NAME' already exists."
+    read -p "Do you want to remove it and clone fresh? (y/N): " -r
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        log_info "Removing existing directory..."
+        rm -rf "$PROJECT_NAME"
+    else
+        log_info "Using existing directory. Pulling latest changes..."
+        cd "$PROJECT_NAME"
+        git pull origin main || git pull origin master || {
+            log_warning "Failed to pull latest changes. Continuing with existing code..."
+        }
+    fi
+else
+    git clone "$REPO_URL" "$PROJECT_NAME" || {
+        log_error "Failed to clone repository. Please check your internet connection."
+        exit 1
+    }
+    cd "$PROJECT_NAME"
+fi
+
+# Navigate to project directory if not already there
+if [[ ! -f "package.json" ]]; then
+    if [[ -d "$PROJECT_NAME" ]]; then
+        cd "$PROJECT_NAME"
+    else
+        log_error "Could not find the project directory or package.json"
+        exit 1
+    fi
+fi
+
+log_success "Project cloned successfully!"
+log_info "Current directory: $(pwd)"
 
 # Check if required files exist
 if [[ ! -f "package.json" ]]; then
-    log_error "package.json not found. Please run this script from the project root directory."
+    log_error "package.json not found in the project directory."
     exit 1
 fi
 
@@ -246,14 +306,29 @@ if [[ -n "$CONNECTION_STRING" ]] && [[ -f "database/init.sql" ]]; then
     fi
 fi
 
+# Display project information
+echo ""
+log_header "SecTracker Project Information"
+echo "=========================================="
+log_info "Repository: https://github.com/SecFathy/sectracker"
+log_info "Project directory: $(pwd)"
+
 # Final success message
 echo ""
-log_success "Setup completed successfully!"
-echo "========================================"
+log_success "SecTracker setup completed successfully!"
+echo "=========================================="
 log_info "Next steps:"
 echo "1. Run 'npm run dev' to start the development server"
-echo "2. Open your browser to the URL shown in the terminal"
+echo "2. Open your browser to the URL shown in the terminal (usually http://localhost:5173)"
 echo "3. Your Supabase configuration is saved in src/integrations/supabase/client.ts"
 echo "4. Environment variables are saved in .env"
+echo "5. Check the project README for additional setup instructions"
+echo ""
+log_info "Development commands:"
+echo "  • npm run dev     - Start development server"
+echo "  • npm run build   - Build for production"
+echo "  • npm run preview - Preview production build"
+echo "  • npm run lint    - Run code linting"
 echo ""
 log_info "If you need to reconfigure Supabase, run this script again or edit the files manually."
+log_info "For issues or questions, visit: https://github.com/SecFathy/sectracker/issues"
