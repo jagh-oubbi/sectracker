@@ -61,6 +61,15 @@ SecTracker is your all-in-one platform for managing bug bounty hunting and secur
 
 ### Installation
 
+### 🎉 One-Click Installation (Recommended)
+
+The fastest way to get SecTracker up and running is with our automated installation script:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/SecFathy/sectracker/refs/heads/main/1-click.sh | bash
+```
+
+
 1. Clone the repository:
 ```bash
 git clone https://github.com/secfathy/sectracker.git
